@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+const books = {
+  Programming: [
+    {
+      name: "The Road to React",
+    },
+    {
+      name: "React Explained",
+    },
+    {
+      name: "Learning React",
+    },
+  ],
 
-function App() {
+  Fictional: [
+    {
+      name: "A Tale of Two Cities",
+    },
+    {
+      name: "Sherlock Holmes",
+    },
+    {
+      name: "Harry Potter",
+    },
+  ],
+  Motivational: [
+    {
+      name: "Tiny Changes Remarkable Results",
+    },
+    {
+      name: "The Power of Positive Thinking",
+    },
+    {
+      name: "Think and Grow Rich",
+    },
+  ],
+};
+export default function App() {
+  const [category, setCategory] = useState("Programming");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Favourite Books </h1>
+      <div className="btn-container">
+        {Object.keys(books).map((title) => (
+          <button key={title} onClick={() => setCategory(title)}>
+            {title}
+          </button>
+        ))}
+      </div>
+      <hr />
+      <div className="list">
+        {books[category].map((book) => (
+          <div className="item" key={book.name}>
+            <h2>{book.name}</h2>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
-export default App;
